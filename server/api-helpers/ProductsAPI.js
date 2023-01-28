@@ -3,7 +3,7 @@ let axios = require('axios');
 
 let options = {
   method: 'get',
-  url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/`,
+  url: `http://localhost:8000/products/products/`,
   headers: { "Authorization": process.env.API_TOKEN },
 };
 
@@ -19,7 +19,7 @@ module.exports.ProductsGet = async (token) => {
 
 let SingleProductGet = async (id) => {
   try {
-    options.url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${id}`;
+    options.url = `http://localhost:8000/products/${id}`;
     let current = await axios(options);
     return current.data;
   }
@@ -30,7 +30,7 @@ let SingleProductGet = async (id) => {
 
 let Styles = async (id) => {
   try {
-    options.url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${id}/styles`;
+    options.url = `http://localhost:8000/products/${id}/styles`;
     let styles = await axios(options);
     return styles.data;
   }
@@ -41,7 +41,7 @@ let Styles = async (id) => {
 
 let Similar = async (id) => {
   try {
-    options.url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${id}/related`;
+    options.url = `http://localhost:8000/products/${id}/related`;
     let similar = await axios(options);
     return similar.data;
   }
@@ -57,7 +57,6 @@ module.exports.currentProduct = async (id) => {
     let selectedProduct = await SingleProductGet(id);
     let selectedStyles = await Styles(id);
     let selectedRelated = await Similar(id);
-
     productDetails.product = selectedProduct;
     productDetails.styles = selectedStyles;
     productDetails.related = selectedRelated;
